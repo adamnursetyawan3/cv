@@ -1,0 +1,404 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Adam Nur Setyawan</title>
+    <!-- Font Awesome untuk ikon-ikon detail pribadi -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        * { 
+            box-sizing: border-box; 
+            margin: 0; 
+            padding: 0; 
+        }
+        
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: #e9ecef;
+            color: #333;
+            line-height: 1.6;
+            min-width: 220mm; /* Memastikan background penuh hingga ke tepi saat discroll */
+        }
+        
+        /* Gaya untuk Header / Tombol Download */
+        .download-btn-container {
+            display: flex;
+            justify-content: center; /* Memposisikan tombol tepat di tengah */
+            align-items: center;
+            width: 100%;
+            padding: 20px;
+            background-color: #212529; /* Background gelap yang memanjang */
+        }
+        .download-btn {
+            text-decoration: none;
+            color: #fff;
+            border: 2px solid #fff;
+            padding: 10px 20px;
+            border-radius: 5px;
+            font-size: 14px;
+            font-weight: bold;
+            background-color: transparent;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+        .download-btn:hover { 
+            background-color: #fff; 
+            color: #212529; 
+        }
+
+        /* Struktur Kontainer Utama */
+        .cv-container {
+            display: flex;
+            width: 210mm; /* Lebar standar kertas A4 */
+            min-height: 297mm; /* Tinggi standar kertas A4 */
+            margin: 30px auto;
+            background-color: #fff;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.15);
+            overflow: hidden;
+        }
+        
+        /* Kolom Kiri - Sisi Gelap */
+        .left-column {
+            width: 35%;
+            background-color: #1a365d; /* Biru dongker profesional */
+            color: #f8f9fa;
+            padding: 40px 25px;
+            display: flex;
+            flex-direction: column;
+            align-items: center; /* Membuat semua isi di tengah (simetris) */
+        }
+
+        /* Foto Profil yang Presisi */
+        .photo-container {
+            width: 160px;
+            height: 160px;
+            border-radius: 50%;
+            border: 5px solid #a0aec0;
+            overflow: hidden;
+            margin-bottom: 25px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.3);
+        }
+        
+        .photo-container img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            object-position: center; /* Presisi tepat di tengah (fokus ke jendela & wajah) */
+        }
+
+        /* Nama di Kiri Lurus Ke Kanan */
+        .name-title {
+            text-align: center;
+            margin-bottom: 35px;
+            width: 100%;
+        }
+        
+        .name-title h1 {
+            font-size: 19px; /* Ukuran disesuaikan agar muat */
+            margin-bottom: 5px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            font-weight: 700;
+            white-space: nowrap; /* Mencegah nama menumpuk ke bawah */
+        }
+        
+        .name-title h2 {
+            font-size: 13px;
+            font-weight: 400;
+            color: #cbd5e0;
+            letter-spacing: 1px;
+        }
+
+        /* Bagian Konten Kiri */
+        .left-content {
+            width: 100%;
+        }
+        
+        .section-title-left {
+            color: #fff;
+            font-size: 16px;
+            margin-bottom: 15px;
+            padding-bottom: 8px;
+            border-bottom: 1px solid #4a5568;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+        
+        /* Detail Kontak */
+        .detail-item {
+            display: flex;
+            align-items: flex-start;
+            margin-bottom: 15px;
+            font-size: 12.5px;
+        }
+        .detail-icon {
+            width: 25px;
+            color: #a0aec0;
+            font-size: 14px;
+            margin-top: 3px;
+        }
+        .detail-text {
+            flex: 1;
+            line-height: 1.5;
+        }
+        
+        /* Keahlian / Bahasa */
+        .skill-item {
+            margin-bottom: 12px;
+        }
+        .skill-name {
+            font-size: 13px;
+            margin-bottom: 4px;
+            display: flex;
+            justify-content: space-between;
+        }
+        .skill-bar {
+            width: 100%;
+            height: 6px;
+            background-color: #2d3748;
+            border-radius: 3px;
+            overflow: hidden;
+        }
+        .skill-level {
+            height: 100%;
+            background-color: #a0aec0;
+        }
+
+        /* Kolom Kanan - Sisi Terang */
+        .right-column {
+            width: 65%;
+            padding: 50px 40px;
+            background-color: #fff;
+        }
+
+        .section-title-right {
+            color: #1a365d;
+            font-size: 20px;
+            margin-bottom: 20px;
+            padding-bottom: 8px;
+            border-bottom: 2px solid #e2e8f0;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            margin-top: 35px;
+        }
+        .section-title-right:first-child {
+            margin-top: 0;
+        }
+
+        .about-text {
+            font-size: 14.5px;
+            color: #4a5568;
+            text-align: justify;
+        }
+        
+        /* Riwayat Pendidikan & Pengalaman (Gaya Timeline) */
+        .timeline-item {
+            margin-bottom: 25px;
+        }
+        .timeline-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: baseline;
+            margin-bottom: 5px;
+            gap: 15px; /* Jarak antara judul dan tanggal */
+        }
+        .timeline-title {
+            font-weight: 700;
+            font-size: 16px;
+            color: #2d3748;
+        }
+        .timeline-date {
+            font-size: 13px;
+            color: #718096;
+            font-weight: 600;
+            background-color: #f7fafc;
+            padding: 4px 8px;
+            border-radius: 4px;
+            white-space: nowrap; /* Mencegah tanggal terbelah ke bawah */
+            flex-shrink: 0; /* Mengunci agar kotak tanggal tidak menyusut */
+        }
+        .timeline-subtitle {
+            font-size: 14px;
+            color: #3182ce;
+            font-weight: 600;
+            margin-bottom: 8px;
+        }
+        .timeline-desc {
+            margin: 0;
+            padding-left: 18px;
+            font-size: 14px;
+            color: #4a5568;
+        }
+        .timeline-desc li {
+            margin-bottom: 6px;
+        }
+        
+        /* Gaya khusus cetak */
+        @media print {
+            @page { margin: 0; size: A4; }
+            body { background-color: #fff; margin: 0; padding: 0; min-width: auto; }
+            .download-btn-container { display: none !important; }
+            .cv-container {
+                margin: 0;
+                box-shadow: none;
+                width: 100%;
+                min-height: 100%;
+            }
+        }
+    </style>
+</head>
+<body>
+
+<!-- Bagian Tombol Download -->
+<div class="download-btn-container">
+    <!-- Tombol ini memicu jendela 'Print' browser, Anda bisa memilih 'Save as PDF' di jendela tersebut -->
+    <button onclick="window.print(); return false;" class="download-btn">
+        <i class="fa-solid fa-download" style="margin-right: 8px;"></i> Simpan Sebagai PDF
+    </button>
+</div>
+
+<!-- Layout Utama -->
+<div class="cv-container">
+    
+    <!-- Kolom Kiri -->
+    <div class="left-column">
+        <!-- Foto Profil Presisi Tengah -->
+        <div class="photo-container">
+            <img src="fotoprofil.jpg" alt="Foto Adam Nur Setyawan">
+        </div>
+        
+        <div class="name-title">
+            <h1>Adam Nur Setyawan</h1>
+            <h2>ADMINISTRASI PERKANTORAN</h2>
+        </div>
+        
+        <div class="left-content">
+            <div class="section-title-left">Kontak & Info</div>
+            
+            <div class="detail-item">
+                <div class="detail-icon"><i class="fa-solid fa-envelope"></i></div>
+                <div class="detail-text">kontak@karinnchans.my.id</div>
+            </div>
+            <div class="detail-item">
+                <div class="detail-icon"><i class="fa-solid fa-phone"></i></div>
+                <div class="detail-text">+62 895-3518-50288</div>
+            </div>
+            <div class="detail-item">
+                <div class="detail-icon"><i class="fa-solid fa-house"></i></div>
+                <div class="detail-text">Graha Harapan Regency Blok 14 No. 12, Rt.007/Rw.012, Kec. Babelan, Kab. Bekasi, Jawa Barat 17610</div>
+            </div>
+            <div class="detail-item">
+                <div class="detail-icon"><i class="fa-solid fa-calendar-days"></i></div>
+                <div class="detail-text">Jakarta, 11 Mei 2007</div>
+            </div>
+            <div class="detail-item">
+                <div class="detail-icon"><i class="fa-solid fa-user"></i></div>
+                <div class="detail-text">Laki-laki | Belum Menikah</div>
+            </div>
+
+            <div class="section-title-left" style="margin-top: 30px;">Kemampuan Bahasa</div>
+            
+            <div class="skill-item">
+                <div class="skill-name"><span>Indonesia</span> <span>Native</span></div>
+                <div class="skill-bar"><div class="skill-level" style="width: 100%;"></div></div>
+            </div>
+            <div class="skill-item">
+                <div class="skill-name"><span>Jawa</span> <span>Fasih</span></div>
+                <div class="skill-bar"><div class="skill-level" style="width: 90%;"></div></div>
+            </div>
+            <div class="skill-item">
+                <div class="skill-name"><span>Inggris</span> <span>Dasar</span></div>
+                <div class="skill-bar"><div class="skill-level" style="width: 40%;"></div></div>
+            </div>
+            <div class="skill-item">
+                <div class="skill-name"><span>Jepang</span> <span>Pemula</span></div>
+                <div class="skill-bar"><div class="skill-level" style="width: 30%;"></div></div>
+            </div>
+
+            <div class="section-title-left" style="margin-top: 30px;">Hobi & Minat</div>
+            
+            <div class="detail-item">
+                <div class="detail-icon"><i class="fa-solid fa-utensils"></i></div>
+                <div class="detail-text">Memasak</div>
+            </div>
+            <div class="detail-item">
+                <div class="detail-icon"><i class="fa-solid fa-music"></i></div>
+                <div class="detail-text">Bermain Musik</div>
+            </div>
+            <div class="detail-item">
+                <div class="detail-icon"><i class="fa-solid fa-laptop-code"></i></div>
+                <div class="detail-text">Ngoding</div>
+            </div>
+        </div>
+    </div>
+    
+    <!-- Kolom Kanan -->
+    <div class="right-column">
+        
+        <div class="section-title-right"><i class="fa-solid fa-user-tie" style="margin-right: 10px; color:#1a365d;"></i> Profil Profesional</div>
+        <div class="about-text">
+            Lulusan baru Otomatisasi dan Tata Kelola Perkantoran yang teliti, sangat terorganisir, dan terbiasa dengan standar kerja perkantoran. Memiliki kompetensi kuat dalam tata kearsipan (manual & digital), korespondensi bisnis, dan entri data. Mahir menggunakan perangkat lunak perkantoran seperti Microsoft Word, Excel, dan Powerpoint. Memiliki komitmen tinggi untuk menjaga kerapian data dan mendukung efisiensi operasional perusahaan.
+        </div>
+
+        <div class="section-title-right"><i class="fa-solid fa-briefcase" style="margin-right: 10px; color:#1a365d;"></i> Pengalaman Kerja</div>
+        
+        <div class="timeline-item">
+            <div class="timeline-header">
+                <div class="timeline-title">Staf Sortir & Logistik</div>
+                <div class="timeline-date">Mei 2023 - Sekarang</div>
+            </div>
+            <div class="timeline-subtitle">TRANSIT POINT LOGOS, BEKASI</div>
+            <ul class="timeline-desc">
+                <li>Mengorganisir, menyortir, dan mempersiapkan kelengkapan barang secara teliti sebelum didistribusikan ke area gudang Distribution Center (DC).</li>
+                <li>Berkolaborasi dengan tim operasional untuk memastikan efisiensi waktu dalam proses penyortiran dan pengemasan produk.</li>
+            </ul>
+        </div>
+
+        <div class="timeline-item">
+            <div class="timeline-header">
+                <div class="timeline-title">Staf Administrasi & Pelayanan (Magang)</div>
+                <div class="timeline-date">Okt 2023 - Des 2023</div>
+            </div>
+            <div class="timeline-subtitle">KANTOR URUSAN AGAMA (KUA), KEC. BABELAN, BEKASI</div>
+            <ul class="timeline-desc">
+                <li>Melakukan tugas administratif kantor secara sistematis, termasuk pengelolaan dokumen dan pemberkasan.</li>
+                <li>Memberikan pelayanan langsung kepada masyarakat dan menjalin komunikasi yang efektif dengan staf lainnya guna memastikan kelancaran operasional.</li>
+            </ul>
+        </div>
+
+        <div class="section-title-right"><i class="fa-solid fa-graduation-cap" style="margin-right: 10px; color:#1a365d;"></i> Riwayat Pendidikan</div>
+        
+        <div class="timeline-item">
+            <div class="timeline-header">
+                <div class="timeline-title">Otomatisasi & Tata Kelola Perkantoran (OTKP)</div>
+                <div class="timeline-date">Jul 2023 - Mei 2025</div>
+            </div>
+            <div class="timeline-subtitle">SMKS ALAM KARYA, BEKASI</div>
+            <ul class="timeline-desc">
+                <li>Mampu mengoperasikan berbagai perangkat lunak perkantoran (Microsoft Word, Excel, Powerpoint) dengan sangat baik.</li>
+                <li>Menguasai prosedur pengelolaan dokumen, arsip, dan korespondensi bisnis secara sistematis dan aman.</li>
+                <li>Terlatih dalam prinsip dasar administrasi, teknik komunikasi profesional, serta standar pelayanan prima (customer service).</li>
+            </ul>
+        </div>
+
+        <div class="timeline-item">
+            <div class="timeline-header">
+                <div class="timeline-title">Pendidikan Menengah Pertama</div>
+                <div class="timeline-date">Apr 2020 - Mar 2023</div>
+            </div>
+            <div class="timeline-subtitle">SMP AZ-ZAHRA, BEKASI</div>
+            <ul class="timeline-desc">
+                <li>Fokus pada pengembangan disiplin, komunikasi dasar, dan konsep manajemen waktu yang efisien.</li>
+            </ul>
+        </div>
+
+    </div>
+</div>
+
+</body>
+</html>
